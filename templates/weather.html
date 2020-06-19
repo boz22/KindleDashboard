@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Weather - next hours</title>
+    </head>
+    <body>
+      <script>
+        setInterval(function(){
+          location.reload();
+         }, 3600000);
+      </script>
+        {% for dp in datapoints %}
+            <div>
+                <p>
+                  <span>{{dp.hour}}&nbsp;|&nbsp;</span>
+                  <span>{{dp.temperature}}C &nbsp;|&nbsp;</span>
+                  <span>{{dp.summary}}&nbsp;|&nbsp;</span>
+                  <!-- <span><img width="50px" height="50px" src="{{dp.icon}}"></img>&nbsp;|&nbsp;</span> -->
+                  <span>Precipitation: {{dp.precip}}&nbsp;|&nbsp;</span>
+                  <span>Wind: {{dp.wind}}&nbsp;|&nbsp;</span>
+                  <span>Humidity: {{dp.humidity}}&nbsp;|&nbsp;</span>
+                  <span>UV Index: {{dp.uvIndex}}&nbsp;|&nbsp;</span>
+                </p>
+            </div>
+        {% endfor %}
+    </body>
+</html>

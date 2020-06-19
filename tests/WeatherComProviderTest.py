@@ -20,10 +20,18 @@ class WeatherComProviderTest( unittest.TestCase ):
     def testHourByHour(self, mock_get):
         weatherCom = WeatherComProvider()
         dpList = weatherCom.getHourByHour();
-        self.assertEqual( '26' + degree_sign, dpList[0].temperature )
+        self.assertEqual( '26', dpList[0].temperature )
         self.assertEqual( 48, len(dpList) )
-        startsWithTest = dpList[2].icon.startswith("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA")
-        self.assertTrue( startsWithTest )
+        self.assertEqual("17", dpList[5].hour)
+        self.assertEqual("0", dpList[12].hour)
+        print(dpList[5].humidity)
+        self.assertEqual("55", dpList[5].humidity)
+        print(dpList[5].uvIndex)
+        self.assertEqual("3", dpList[5].uvIndex)
+        print(dpList[5].windSpeed)
+        self.assertEqual("9", dpList[5].windSpeed)
+        print(dpList[5].windDirection)
+        self.assertEqual("WNW", dpList[5].windDirection)
 
 if __name__ == '__main__':
     unittest.main()
