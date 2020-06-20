@@ -3,16 +3,25 @@ sys.path.append('../')
 import unittest
 from unittest import mock
 from weather_utils import degree_sign
+from data_utils import objects_list_to_csv;
 
 from WeatherComProvider import WeatherComProvider
 
 def mocked_requests_get(*args, **kwargs):
     class MockResponse:
-        def __init__(self):
-            f = open("hour_by_hour.html", "r")
+        def __init__(self, forecastType):
+            if "hourbyhour" in forecastType:
+                f = open("hour_by_hour.html", "r")
+            else:
+                f = open("daily.html", "r")
             self.text = f.read()
             f.close()
-    return MockResponse()
+
+    forecastType = ""
+    for arg in args:
+        forecastType = arg
+        break
+    return MockResponse( forecastType )
 
 
 class WeatherComProviderTest( unittest.TestCase ):
@@ -32,6 +41,13 @@ class WeatherComProviderTest( unittest.TestCase ):
         self.assertEqual("9", dpList[5].windSpeed)
         print(dpList[5].windDirection)
         self.assertEqual("WNW", dpList[5].windDirection)
+
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def testDaily(self, mock_get_daily):
+        weatherCom = WeatherComProvider()
+        dpList = weatherCom.getDaily();
+        self.assertEqual(5, len( dpList ))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -8,19 +8,54 @@
           location.reload();
          }, 3600000);
       </script>
-        {% for dp in datapoints %}
-            <div>
-                <p>
-                  <span>{{dp.hour}}&nbsp;|&nbsp;</span>
-                  <span>{{dp.temperature}}C &nbsp;|&nbsp;</span>
-                  <span>{{dp.summary}}&nbsp;|&nbsp;</span>
-                  <!-- <span><img width="50px" height="50px" src="{{dp.icon}}"></img>&nbsp;|&nbsp;</span> -->
-                  <span>Precipitation: {{dp.precip}}&nbsp;|&nbsp;</span>
-                  <span>Wind: {{dp.wind}}&nbsp;|&nbsp;</span>
-                  <span>Humidity: {{dp.humidity}}&nbsp;|&nbsp;</span>
-                  <span>UV Index: {{dp.uvIndex}}&nbsp;|&nbsp;</span>
-                </p>
-            </div>
-        {% endfor %}
+      <div id="nextDays" style="clear: both; margin: auto;">
+        <table>
+          <tr>
+              <td>
+                  <img width="300px" src="{{today.icon}}"></img>
+              </td>
+              <td>
+                 <h1 style="padding-left:100px; font-size: 70px"> {{today.hTemp}} / {{today.lTemp}} </h1>
+                 <h1 style="padding-left:100px; font-size: 30px">Precip: {{today.precip}}</h1>
+              </td>
+              <td>
+                <h1 style="padding-left:50px; font-size: 30px">At {{ nextHour.hour }}:00 :</h1>
+                <h1 style="padding-left:50px; font-size: 30px">{{nextHour.temperature}}&#8451;</h1>
+                <h1 style="padding-left:50px; font-size: 30px">{{nextHour.windSpeed}}km/h {{nextHour.windDirection}}</h1>
+                <h1 style="padding-left:50px; font-size: 30px">{{nextHour.humidity}}% humidity</h1>
+                <h1 style="padding-left:50px; font-size: 30px">{{nextHour.precip}}% precip</h1>
+              </td>
+          </tr>
+        </table>
+        <ul style="list-style-type: none;">
+          {% for day in nextDays %}
+            <li style="float: left; margin-right: 30px; margin-bottom: 30px; border: 1px solid">
+                <table>
+                  <tr>
+                      <td>
+                          <h3>{{ day.day }}</h3>
+                      </td>
+                      <td>
+                         <h1> {{day.hTemp}} / {{day.lTemp}} </h1>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <img width="130px" src="{{day.icon}}"></img>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <h1>Precipitation: {{day.precip}}</h1>
+                    </td>
+                  </tr>
+                </table>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <img style="margin-top: 50px" src="{{precipImageSrc}}"></img>
+      </div>
     </body>
 </html>

@@ -1,0 +1,50 @@
+hour,humidity,precip,summary,temperature,uvIndex,windDirection,windSpeed
+12,63,15,Partly Cloudy,26,7,W,8
+13,61,15,Partly Cloudy,27,8,W,9
+14,58,15,Partly Cloudy,27,8,W,11
+15,57,25,Mostly Cloudy,27,6,WNW,11
+16,55,25,Mostly Cloudy,27,4,WNW,11
+17,55,35,Isolated Thunderstorms,27,3,WNW,9
+18,61,55,Scattered Thunderstorms,26,2,WNW,8
+19,61,60,Thunderstorms,25,1,NW,6
+20,62,65,Thunderstorms,25,0,NW,6
+21,68,70,Thunderstorms,23,0,NW,8
+22,72,60,Scattered Thunderstorms,23,0,NW,3
+23,77,65,Thunderstorms,21,0,NW,4
+0,84,65,Thunderstorms,20,0,NW,4
+1,87,50,Scattered Thunderstorms,20,0,WNW,4
+2,91,60,Thunderstorms,18,0,WNW,4
+3,92,60,Thunderstorms,18,0,WNW,3
+4,93,70,Thunderstorms,18,0,NNW,3
+5,93,65,Light Rain,18,0,WNW,3
+6,93,70,Light Rain,18,0,W,3
+7,93,70,Thunderstorms,18,0,W,3
+8,96,65,Thunderstorms,17,0,WSW,4
+9,94,75,Thunderstorms,18,1,SW,6
+10,90,75,Thunderstorms,18,1,SSW,6
+11,88,75,Thunderstorms,19,3,SW,6
+12,82,70,Thunderstorms,20,4,WSW,6
+13,78,55,Scattered Thunderstorms,21,3,WSW,6
+14,74,50,Scattered Thunderstorms,22,5,W,9
+15,69,45,Scattered Thunderstorms,23,4,W,8
+16,66,55,Scattered Thunderstorms,23,3,WNW,8
+17,65,55,Scattered Thunderstorms,23,2,WNW,6
+18,69,40,Scattered Thunderstorms,23,1,WNW,6
+19,67,40,Scattered Thunderstorms,23,0,WNW,6
+20,69,50,Scattered Thunderstorms,22,0,WNW,6
+21,74,45,Scattered Thunderstorms,22,0,WNW,4
+22,78,35,Isolated Thunderstorms,21,0,WNW,4
+23,84,35,Few Showers,20,0,W,3
+0,88,40,Showers,19,0,W,3
+1,90,40,Showers,18,0,W,3
+2,93,40,Showers,18,0,W,3
+3,95,35,Showers,17,0,WSW,1
+4,95,40,Showers,17,0,WSW,3
+5,95,35,Showers,17,0,SW,3
+6,95,35,Showers,17,0,SSW,3
+7,95,35,Showers,17,0,SSW,4
+8,95,45,Showers,17,0,SW,6
+9,93,35,Showers,17,1,SSW,6
+10,90,40,Scattered Thunderstorms,18,2,SSW,6
+11,86,35,Scattered Thunderstorms,19,3,SSW,6
+

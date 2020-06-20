@@ -1,4 +1,5 @@
 from WeatherDatapoint import WeatherDatapoint
+from WeatherDayDatapoint import WeatherDayDatapoint
 from typing import List
 import requests
 from bs4 import BeautifulSoup
@@ -14,6 +15,17 @@ class WeatherComProvider:
     def __init__( self ):
         #TODO: Figure out URL by providing the location or latitude, longitude
         self.hourByHourUrl = "https://weather.com/weather/hourbyhour/l/528bd2c6382325ac2a6194902c8d73cd603a32bee30cef6a16447b533486a83d"
+        self.dailyUrl = "https://weather.com/weather/today/l/528bd2c6382325ac2a6194902c8d73cd603a32bee30cef6a16447b533486a83d"
+
+    """
+    Returns a list with objects, each object representing the forecast for a day
+    """
+    def getDaily(self):
+        print('Retrieving daily forecast...')
+        print('Requesting page: ' + self.dailyUrl)
+        page = requests.get(self.dailyUrl)
+        days = self.__getDailyDatapoints( page.text )
+        return days
 
     def getHourByHour(self) -> List:
         print('Retrieving hour by hour forecacst')
@@ -21,6 +33,29 @@ class WeatherComProvider:
         page = requests.get(self.hourByHourUrl)
         datapoints = self.getDatapoints( page.text )
         return datapoints
+
+
+    def __getDailyDatapoints( self, htmlText ):
+        soup = BeautifulSoup(htmlText, 'html.parser')
+        section = soup.find("section", attrs={ 'data-testid': 'DailyWeatherModule' });
+        daysListElem = section.find("ul", attrs={ 'data-testid': 'WeatherTable' });
+        days = daysListElem.find_all("li");
+        daysDp = []
+        for day in days:
+            dayLabel = day.find("h3").get_text()
+            highTemp = day.find("div", attrs={ 'data-testid': 'SegmentHighTemp' }).get_text()
+            if "-" not in highTemp:
+                highTemp = self.convertToCelsius(highTemp) + degree_sign
+            lowTemp = day.find("div", attrs={ 'data-testid': 'SegmentLowTemp' }).get_text()
+            lowTemp = self.convertToCelsius(lowTemp) + degree_sign
+            icon = day.find("svg");
+            icon['xmlns:xlink'] = "http://www.w3.org/1999/xlink"
+            icon = inlineSvg( icon, soup )
+            iconBase64 = self.convertIconToBase64( str(icon) );
+            precip = day.find("div", attrs={ 'data-testid': 'SegmentPrecipPercentage' }).get_text()
+            dayDp = WeatherDayDatapoint(dayLabel, highTemp, lowTemp, iconBase64, precip)
+            daysDp.append(dayDp)
+        return daysDp
 
     def getDatapoints(self, htmlText):
         print('Building list with hourly datapoints')
@@ -69,6 +104,7 @@ class WeatherComProvider:
         #iconStr = self.convertIconToBase64( iconStr )
         summaryStr = summary.text
         precipStr = precip.text
+        precipStr = precipStr[:-1]
         windStr = wind.text
         windSpeed, windDirection = self.getWindSpeedAndDirection( windStr )
         windSpeed = str(int( convert_miles_to_km((int( windSpeed ) )) ))
