@@ -5,8 +5,24 @@ from data_utils import objects_list_to_csv;
 from WeatherDatapoint import WeatherDatapoint
 import pandas as pd
 import matplotlib.pyplot as plt
+#Skyfield
+from skyfield.api import Topos
+from skyfield.api import load
+from skyfield import almanac
+from skyfield import api
+ts = load.timescale()
+eph = api.load('de421.bsp')
 
 class TestDataManipulatoin( unittest.TestCase ):
+
+    def testSunrise(self):
+        timisoaraLoc = api.Topos('45.4758 N', '21.1738 E')
+        t0 = ts.utc(2018, 9, 12, 4)
+        t1 = ts.utc(2018, 9, 13, 4)
+        t, y = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(eph, timisoaraLoc))
+        print("****************")
+        print(t.utc_iso())
+        print(y)
 
     def testListToCsv(self):
         print('Running testListToCsv')

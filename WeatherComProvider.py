@@ -55,6 +55,13 @@ class WeatherComProvider:
             precip = day.find("div", attrs={ 'data-testid': 'SegmentPrecipPercentage' }).get_text()
             dayDp = WeatherDayDatapoint(dayLabel, highTemp, lowTemp, iconBase64, precip)
             daysDp.append(dayDp)
+
+        #The first element of the list with today, so we use the same page to retrieve the sunrise and sunset for today
+        todaySection = soup.find("section", attrs={ 'data-testid': 'TodaysDetailsModule' });
+        sunriseValue = todaySection.find("div", attrs={ 'data-testid': 'SunriseValue' }).get_text();
+        sunsetValue = todaySection.find("div", attrs={ 'data-testid': 'SunsetValue' }).get_text();
+        daysDp[0].setSunrise( sunriseValue )
+        daysDp[0].setSunset( sunsetValue )
         return daysDp
 
     def getDatapoints(self, htmlText):

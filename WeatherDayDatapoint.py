@@ -5,3 +5,9 @@ class WeatherDayDatapoint:
         self.lTemp = lTemp;
         self.icon = icon;
         self.precip = precip;
+
+    def setSunrise(self, sunrise):
+        self.sunrise = sunrise
+
+    def setSunset( self, sunset ):
+        self.sunset = sunset
