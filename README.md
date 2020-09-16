@@ -19,13 +19,15 @@ Activate the virtualenv using the command: *virtualenv: source env/bin/activate*
 
 #### Install Dependencies
 The required depedendencies are saved into [requirements.txt](requirements.txt) using *pip freeze > requirements.txt*
-To install all dependencies, run *pip install –r requirements.txt*
+  To install all dependencies, run *pip install –r requirements.txt*
 
 ##### Some possible issues with dependencies
 There may be an issue when running the install of dependencies from the requirements.txt file. Namely, the **pkg-resources==0.0.0** might fail to install properly. The solution is to simply comment this one and run again.
 
 #### Run the server
-Run the server using *python app.py*.
+- Make sure you have your virtualenv active: *source env/bin/activate*
+- Run the server using *python app.py*.
+- To run the server in background *nohup python app.py &*
 
 #### Open Experimental Browser on Kindle
 *Note: The server that was started at the previous step should run in a location accessible from Kindle (e.g.: local network)*

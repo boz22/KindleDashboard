@@ -75,7 +75,7 @@ class WeatherComProvider:
         for detailSection in detailsSections:
             #Summary card
             detailSummary = detailSection.find("summary")
-            hour = detailSummary.find('h3', attrs={ 'data-testid': 'daypartName' })
+            hour = detailSummary.find('h2', attrs={ 'data-testid': 'daypartName' })
             temperature = detailSummary.find('span', attrs={ 'data-testid': 'TemperatureValue' })
             iconAndSummary = detailSummary.find('div', attrs={ 'data-testid': 'wxIcon' })
             icon = iconAndSummary.find("svg");
