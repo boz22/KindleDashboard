@@ -34,10 +34,31 @@ There may be an issue when running the install of dependencies from the requirem
 Point the Experimental Browser in Kindle to the address: **<server_address>:<server_port>/weather/now**
 By default the port is **5000**.
 
+#### Turn off screen saver on Kindle
+Solution from: [https://www.mobileread.com/forums/showthread.php?p=1935291](https://www.mobileread.com/forums/showthread.php?p=1935291)
+On the K4 (non-touch):
+1. Tap the keyboard button.
+2. Type *;debugOn* and then finish with a return. (Nothing appears to happen.)
+3. Type *~disableScreensaver* 
+
 ### Deploying to Raspberry
 - Run *deploy-to-raspberry.sh* to deploy the files to raspberry.
 This will copy the necessary files remotely (except downloaded modules and pycache).
+- To run the server in background *nohup python3 app.py &*
 
+#### Systemd Unit - Preferred way
+To have autorestart when the system is reboot, use the systemd unit in [kindledashboard.service](./systemd/kindledashboard.service)
+**Note: Since the systemd unit will also be copied using the *deploy-to-raspberry.sh* script, it can be copied directly from there into systemd folder. This means that the first 2 steps can be skipped in that case**
+1. Copy the systemd unit remotely in tmp folder, because we don't have root user
+*scp ./systemd/kindledashboard.service pi@rasp.local:/tmp/kindledashboard.service*
+2. Login to Raspberry
+*ssh pi@rasp.local*
+3. Copy the systemd unit from the /tmp folder into the systemd folder
+*sudo cp /tmp/kindledashboard.service /etc/systemd/system/kindledashboard.service*  
+4. Enable the systemd unit
+*sudo systemctl enable kindledashboard.service*
+5. Restart the service
+*sudo systemctl restart kindledashboard.service*
 
 ### Docker
 A docker image is also provided in *Dockerfile*.
